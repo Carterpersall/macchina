@@ -31,6 +31,7 @@ pub enum ReadoutKey {
     Uptime,
     Processor,
     ProcessorLoad,
+    GPU,
     Memory,
     Battery,
 }
@@ -54,6 +55,7 @@ impl Display for ReadoutKey {
             Self::Uptime => write!(f, "Uptime"),
             Self::Processor => write!(f, "Processor"),
             Self::ProcessorLoad => write!(f, "ProcessorLoad"),
+            Self::GPU => write!(f, "GPU"),
             Self::Memory => write!(f, "Memory"),
             Self::Battery => write!(f, "Battery"),
         }
@@ -181,6 +183,9 @@ pub fn get_all_readouts<'a>(
             }
             ReadoutKey::ProcessorLoad => {
                 handle_readout_processor_load(&mut readout_values, &general_readout, theme)
+            }
+            ReadoutKey::GPU => {
+                handle_readout_gpu(&mut readout_values, &general_readout)
             }
             ReadoutKey::Memory => handle_readout_memory(&mut readout_values, theme),
             ReadoutKey::Battery => handle_readout_battery(&mut readout_values, theme),
@@ -390,6 +395,13 @@ fn handle_readout_processor_load(
             readout_values.push(Readout::new(ReadoutKey::ProcessorLoad, format_cpu_usage(u)))
         }
         (Err(e), _) => readout_values.push(Readout::new_err(ReadoutKey::ProcessorLoad, e)),
+    }
+}
+
+fn handle_readout_gpu(readout_values: &mut Vec<Readout>, general_readout: &GeneralReadout) {
+    match general_readout.gpu_model_name() {
+        Ok(g) => readout_values.push(Readout::new(ReadoutKey::GPU, g)),
+        Err(e) => readout_values.push(Readout::new_err(ReadoutKey::GPU, e)),
     }
 }
 

@@ -212,6 +212,7 @@ impl Theme {
             ReadoutKey::Packages => self.keys.get_packages(),
             ReadoutKey::Processor => self.keys.get_cpu(),
             ReadoutKey::ProcessorLoad => self.keys.get_cpu_load(),
+            ReadoutKey::GPU => self.keys.get_gpu(),
             ReadoutKey::Battery => self.keys.get_battery(),
             ReadoutKey::Backlight => self.keys.get_backlight(),
             ReadoutKey::Uptime => self.keys.get_uptime(),
