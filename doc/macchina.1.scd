@@ -61,12 +61,6 @@ on performance.
 *-v, --version*
 	Prints version information.
 
-*-m, --memory-percentage*
-	Show memory usage in percentage
-
-*-p, --disk-space-percentage*
-	Show disk space usage in percentage
-
 *-o, --show*
 	Display only the specified readouts.
 
@@ -93,7 +87,6 @@ on performance.
 	- Memory
 	- Battery
 	- GPU
-	- DiskSpace
 
 *--ascii-artists*
 	Lists the original artists of the ASCII art used by macchina.
